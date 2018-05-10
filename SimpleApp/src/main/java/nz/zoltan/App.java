@@ -1,30 +1,3 @@
-# Playing with Apache Spark
-
-## First Steps: Running Spark development environment
-
-Start with Quick Start from the official documentation: https://spark.apache.org/docs/latest/quick-start.html
-
-Let's implement the Self-Contained Application.
-
-Source: https://spark.apache.org/docs/latest/quick-start.html#self-contained-applications
-
-1. Create a new Maven project.
-2. Add the code from the documentation.
-3. Save a huge sample text in your `resources` folder.
-
-**Issue #1**: The code will not work without a little change.
-
-We have to use type casting in the lambda function.
-
-`(FilterFunction<String>)`
-
-**Issue #2**: It is much easier to debug your code if you run Spark server in local mode.
-
-`.config("spark.master", "local")`
-
-The right code:
-
-```java
 package nz.zoltan;
 
 import org.apache.spark.api.java.function.FilterFunction;
@@ -55,6 +28,3 @@ public class App {
         spark.stop();
     }
 }
-```
-
-More details about single developer mode: https://stackoverflow.com/questions/38008330/spark-error-a-master-url-must-be-set-in-your-configuration-when-submitting-a
