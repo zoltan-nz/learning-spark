@@ -60,3 +60,8 @@ public class App {
 More details about single developer mode: https://stackoverflow.com/questions/38008330/spark-error-a-master-url-must-be-set-in-your-configuration-when-submitting-a
 
 **Master URLs**: https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
+
+## Second Steps: Using RDD
+
+Read this: https://spark.apache.org/docs/latest/rdd-programming-guide.html
+

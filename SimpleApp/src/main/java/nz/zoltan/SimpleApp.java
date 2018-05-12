@@ -7,11 +7,12 @@ import org.apache.spark.sql.SparkSession;
 /**
  * Hello world!
  */
-public class App {
-    public static void main(String[] args) throws InterruptedException {
+public class SimpleApp {
 
-        // A sample big text file location
-        String bigTextFileLocation = "SimpleApp/src/main/resources/sample-text/toldi.txt";
+    // A sample big text file location
+    public static final String BIG_TEXT_FILE_LOCATION = "SimpleApp/src/main/resources/sample-text/toldi.txt";
+
+    public static void main(String[] args) {
 
         // Launching a Spark instance
         SparkSession spark = SparkSession
@@ -21,7 +22,7 @@ public class App {
                 .getOrCreate();
 
         // Reading the file from the file system
-        Dataset<String> bigTextFileByLine = spark.read().textFile(bigTextFileLocation).cache();
+        Dataset<String> bigTextFileByLine = spark.read().textFile(BIG_TEXT_FILE_LOCATION).cache();
 
         // Basic analysis
         long numAs = bigTextFileByLine.filter((FilterFunction<String>) line -> line.contains("a")).count();
