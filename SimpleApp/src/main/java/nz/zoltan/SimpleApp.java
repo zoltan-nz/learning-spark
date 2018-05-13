@@ -4,13 +4,12 @@ import org.apache.spark.api.java.function.FilterFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 
+import static nz.zoltan.Constants.BIG_TEXT_FILE_LOCATION;
+
 /**
  * Hello world!
  */
 public class SimpleApp {
-
-    // A sample big text file location
-    public static final String BIG_TEXT_FILE_LOCATION = "SimpleApp/src/main/resources/sample-text/toldi.txt";
 
     public static void main(String[] args) {
 

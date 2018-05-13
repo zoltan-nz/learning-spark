@@ -1,6 +1,6 @@
 # Playing with Apache Spark
 
-## First Steps: Running Spark development environment
+## First Step: Running Spark development environment
 
 Start with Quick Start from the official documentation: https://spark.apache.org/docs/latest/quick-start.html
 
@@ -61,7 +61,10 @@ More details about single developer mode: https://stackoverflow.com/questions/38
 
 **Master URLs**: https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
 
-## Second Steps: Using RDD
+## Second Step: Using RDD
 
 Read this: https://spark.apache.org/docs/latest/rdd-programming-guide.html
+
+More details in [`RDDApp`](RDDApp/src/main/java/nz/zoltan/RDDApp.java)
+
 
