@@ -68,3 +68,6 @@ Read this: https://spark.apache.org/docs/latest/rdd-programming-guide.html
 More details in [`RDDApp`](RDDApp/src/main/java/nz/zoltan/RDDApp.java)
 
 
+## Notes
+
+* Using multi module maven structure. More information about building a multi module maven project: https://books.sonatype.com/mvnex-book/reference/multimodule.html
