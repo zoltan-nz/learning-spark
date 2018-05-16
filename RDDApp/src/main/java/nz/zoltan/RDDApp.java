@@ -1,9 +1,12 @@
 package nz.zoltan;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.storage.StorageLevel;
+import scala.Tuple2;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +39,7 @@ public class RDDApp {
         System.out.println("distData.reduce: " + sum);
 
         // Aggregate the length of lines in a text file
-        JavaRDD<String> lines = sc.textFile(BIG_TEXT_FILE_LOCATION);
+        JavaRDD<String> lines = sc.textFile(BIG_TEXT_FILE_LOCATION).cache();
         JavaRDD<Integer> lineLengths = lines
                 .map(String::length)
                 .persist(StorageLevel.MEMORY_AND_DISK());
@@ -44,6 +47,16 @@ public class RDDApp {
         int totalLength = lineLengths.reduce((a, b) -> a + b);
 
         System.out.println("lineLengths.reduce: " + totalLength);
+
+
+        // Using key-value pairs
+        JavaRDD<String> words = lines.flatMap(line -> Arrays.asList(line.split(" ")).iterator());
+        JavaPairRDD<String, Integer> wordsWithOne = words.mapToPair(word -> new Tuple2<>(word, 1));
+        JavaPairRDD<String, Integer> wordsWithCount = wordsWithOne.reduceByKey((a, b) -> a + b);
+        JavaPairRDD<Integer, String> countsWithWord = wordsWithCount.mapToPair(Tuple2::swap);
+        JavaPairRDD<Integer, String> sortedCounts = countsWithWord.sortByKey();
+
+        sortedCounts.collect().forEach((tuple) -> System.out.println(tuple._2 + ": " + tuple._1));
 
         sc.stop();
     }

@@ -67,6 +67,19 @@ Read this: https://spark.apache.org/docs/latest/rdd-programming-guide.html
 
 More details in [`RDDApp`](RDDApp/src/main/java/nz/zoltan/RDDApp.java)
 
+Counting and sorting words in a huge text file:
+
+```java
+JavaRDD<String> lines = sc.textFile(BIG_TEXT_FILE_LOCATION).cache();
+
+JavaRDD<String> words = lines.flatMap(line -> Arrays.asList(line.split(" ")).iterator());
+JavaPairRDD<String, Integer> wordsWithOne = words.mapToPair(word -> new Tuple2<>(word, 1));
+JavaPairRDD<String, Integer> wordsWithCount = wordsWithOne.reduceByKey((a, b) -> a + b);
+JavaPairRDD<Integer, String> countsWithWord = wordsWithCount.mapToPair(Tuple2::swap);
+JavaPairRDD<Integer, String> sortedCounts = countsWithWord.sortByKey();
+
+sortedCounts.collect().forEach((tuple) -> System.out.println(tuple._2 + ": " + tuple._1));
+```
 
 ## Notes
 
