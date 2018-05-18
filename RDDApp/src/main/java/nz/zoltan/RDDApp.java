@@ -63,7 +63,7 @@ public class RDDApp {
 
 
         // Using Accumulator
-        LongAccumulator accum = sc.sc().longAccumulator();
+        LongAccumulator accum = sc.sc().longAccumulator("counter");
         List<Integer> numbers = IntStream.range(1, 10000000).boxed().collect(Collectors.toList());
         sc.parallelize(numbers).foreach(accum::add);
 
