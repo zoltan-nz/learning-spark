@@ -13,8 +13,9 @@
 
     <modules>
         <module>Common</module>
-        <module>RDDApp</module>
         <module>SimpleApp</module>
+        <module>RDDApp</module>
+        <module>StreamingApp</module>
     </modules>
 
     <properties>

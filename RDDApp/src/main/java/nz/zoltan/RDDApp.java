@@ -20,7 +20,7 @@ public class RDDApp {
     private static final String APP_NAME = "RDD App";
     private static final String MASTER = "local[8]";
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
 
         SparkConf sparkConf = new SparkConf()
