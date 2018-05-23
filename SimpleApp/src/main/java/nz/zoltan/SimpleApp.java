@@ -20,8 +20,13 @@ public class SimpleApp {
                 .config("spark.master", "local")
                 .getOrCreate();
 
+        // If the working directory is the app folder, we have to modify the location of the big text file.
+        String textFileLocation = (System.getProperty("user.dir").contains("SimpleApp"))
+                ? "../" + BIG_TEXT_FILE_LOCATION
+                : BIG_TEXT_FILE_LOCATION;
+
         // Reading the file from the file system
-        Dataset<String> bigTextFileByLine = spark.read().textFile(BIG_TEXT_FILE_LOCATION).cache();
+        Dataset<String> bigTextFileByLine = spark.read().textFile(textFileLocation).cache();
 
         // Basic analysis
         long numAs = bigTextFileByLine.filter((FilterFunction<String>) line -> line.contains("a")).count();

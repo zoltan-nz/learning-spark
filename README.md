@@ -20,6 +20,8 @@ We have to use type casting in the lambda function.
 
 **Issue #2**: It is much easier to debug your code if you run Spark server in local mode.
 
+* Allowed Master URLs: https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
+
 `.config("spark.master", "local")`
 
 The right code:
@@ -81,6 +83,22 @@ JavaPairRDD<Integer, String> sortedCounts = countsWithWord.sortByKey();
 sortedCounts.collect().forEach((tuple) -> System.out.println(tuple._2 + ": " + tuple._1));
 ```
 
-## Notes
+## Notes in terms of Maven
 
 * Using multi module maven structure. More information about building a multi module maven project: https://books.sonatype.com/mvnex-book/reference/multimodule.html
+* Add `maven-exec-plugin` to run the app
+
+## Using Docker
+
+**Creating a Docker file**
+
+I created a lightweight Java and Maven container.
+
+Inspirations:
+* Java installation based on this [Dockerfile](https://github.com/docker-library/openjdk/blob/dd54ae37bc44d19ecb5be702d36d664fed2c68e4/8/jdk/alpine/Dockerfile)
+* Maven installation based on this [Dockerfile](https://github.com/Zenika/alpine-maven/blob/master/jdk8/Dockerfile)
+
+```java
+$ docker build -t learning-spark .
+$ docker run -p 4040:4040 -p 8080:8080 -p 7077:7077 -p 6066:6066 learning-spark:latest
+```
