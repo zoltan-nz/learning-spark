@@ -100,5 +100,5 @@ Inspirations:
 
 ```java
 $ docker build -t learning-spark .
-$ docker run -p 4040:4040 -p 8080:8080 -p 7077:7077 -p 6066:6066 learning-spark:latest
+$ docker run learning-spark:latest mvn --pl SimpleApp exec:java 
 ```
